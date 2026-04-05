@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: crossword-competition-app
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DATA_DIR
+        value: /var/data
+    disk:
+      name: crossword-data
+      mountPath: /var/data
+      sizeGB: 1

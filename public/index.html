@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crossword Clash</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+
+      <header class="site-header">
+        <div class="brand-lockup">
+          <p class="eyebrow">Online Crossword Competition</p>
+          <h1>Crossword Clash</h1>
+        </div>
+        <div class="header-pills">
+          <span>Live rounds</span>
+          <span>Section control</span>
+          <span>Ranked scoring</span>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy panel panel-hero">
+          <p class="eyebrow">Competition Arena</p>
+          <h2>Turn crossword practice into a timed tournament experience.</h2>
+          <p class="hero-text">
+            Host section-based Operating Systems rounds, advance questions from the admin desk, and let students compete in a cleaner, more polished interface.
+          </p>
+          <div class="hero-actions">
+            <span class="hero-chip">Responsive board</span>
+            <span class="hero-chip">Admin section switch</span>
+            <span class="hero-chip">Live leaderboard</span>
+          </div>
+        </div>
+
+        <aside class="hero-rail">
+          <div class="panel feature-panel">
+            <p class="mini-label">Quick Notes</p>
+            <ul class="feature-list">
+              <li>Default admin password: <code>gokuldevi</code></li>
+              <li>Full OS competition unlocks 5 clues per section</li>
+              <li>Leaderboard refreshes after every submission</li>
+            </ul>
+          </div>
+          <div class="stats-strip">
+            <div class="stat-card">
+              <span class="stat-kicker">Rounds</span>
+              <strong>5 Sections</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-kicker">Format</span>
+              <strong>25 Clues</strong>
+            </div>
+            <div class="stat-card">
+              <span class="stat-kicker">Control</span>
+              <strong>Admin Driven</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <main class="dashboard">
+        <aside class="sidebar">
+          <section class="panel auth-panel">
+            <div class="panel-head">
+              <p class="mini-label">Player Access</p>
+              <h3>Join the competition</h3>
+              <p>Create an account or log in with your username.</p>
+            </div>
+            <form class="stack">
+              <label>
+                <span>Username</span>
+                <input id="username" type="text" minlength="3" placeholder="Enter username" required />
+              </label>
+              <div class="button-row">
+                <button type="button" id="register-btn">Register</button>
+                <button type="button" id="login-btn" class="secondary">Login</button>
+              </div>
+            </form>
+            <div id="player-status" class="status-box muted">Not logged in.</div>
+          </section>
+
+          <section class="panel puzzle-list-panel">
+            <div class="panel-head">
+              <p class="mini-label">Competition List</p>
+              <h3>Select a round</h3>
+              <p>Choose a puzzle and start the timer.</p>
+            </div>
+            <div id="puzzle-list" class="card-list"></div>
+          </section>
+        </aside>
+
+        <section class="main-stage">
+          <section class="panel game-panel">
+            <div class="panel-head stage-head">
+              <div>
+                <p class="mini-label">Live Puzzle</p>
+                <h3>Crossword board</h3>
+                <p>Open a competition to begin solving.</p>
+              </div>
+              <div class="stage-badge">Competition Mode</div>
+            </div>
+            <div id="game-empty" class="empty-state">
+              <div class="empty-art"></div>
+              <p>No puzzle selected yet.</p>
+            </div>
+            <div id="game-area" class="hidden">
+              <div class="game-topbar">
+                <div>
+                  <h3 id="puzzle-title"></h3>
+                  <p id="puzzle-description" class="muted"></p>
+                  <p id="section-status" class="muted hidden"></p>
+                </div>
+                <div class="timer-box">
+                  <span>Time left</span>
+                  <strong id="timer">00:20</strong>
+                </div>
+              </div>
+              <div class="game-grid-layout">
+                <div class="board-shell">
+                  <div id="crossword-grid" class="crossword-grid"></div>
+                </div>
+                <div class="clue-area">
+                  <div class="clue-column">
+                    <h4>Across</h4>
+                    <div id="across-clues" class="clue-list"></div>
+                  </div>
+                  <div class="clue-column">
+                    <h4>Down</h4>
+                    <div id="down-clues" class="clue-list"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="action-bar">
+                <button id="hint-btn" type="button">Use Hint</button>
+                <button id="submit-btn" type="button" class="accent">Submit Puzzle</button>
+              </div>
+              <div id="result-box" class="result-box hidden"></div>
+            </div>
+          </section>
+
+          <section class="bottom-grid">
+            <section class="panel leaderboard-panel">
+              <div class="panel-head">
+                <p class="mini-label">Rankings</p>
+                <h3>Leaderboard</h3>
+                <p>Top players update after each completed puzzle.</p>
+              </div>
+              <div id="leaderboard" class="leaderboard-table muted">Choose a puzzle to see rankings.</div>
+            </section>
+
+            <section class="panel admin-panel">
+              <div class="panel-head">
+                <p class="mini-label">Admin Desk</p>
+                <h3>Manage sections and puzzles</h3>
+                <p>Create new crosswords and control the full competition flow.</p>
+              </div>
+              <form id="admin-login-form" class="stack narrow">
+                <label>
+                  <span>Admin Password</span>
+                  <input id="admin-password" type="password" placeholder="Enter admin password" />
+                </label>
+                <button id="admin-login-btn" type="button">Admin Login</button>
+              </form>
+              <div id="admin-area" class="hidden">
+                <div class="status-box admin-status-box">
+                  <div>
+                    <strong>Full Competition Section</strong>
+                    <p id="admin-section-status">Section 1</p>
+                  </div>
+                  <button id="change-section-btn" type="button">Change Section</button>
+                </div>
+                <form id="puzzle-form" class="stack">
+                  <label>
+                    <span>Puzzle Title</span>
+                    <input id="admin-title" type="text" placeholder="Weekly Challenge" required />
+                  </label>
+                  <label>
+                    <span>Description</span>
+                    <input id="admin-description" type="text" placeholder="Short puzzle description" />
+                  </label>
+                  <label>
+                    <span>Time Limit (seconds)</span>
+                    <input id="admin-timelimit" type="number" value="20" min="5" max="600" required />
+                  </label>
+                  <label>
+                    <span>Across Entries</span>
+                    <textarea id="admin-across" rows="5" placeholder="Format: number,row,col,answer,clue"></textarea>
+                  </label>
+                  <label>
+                    <span>Down Entries</span>
+                    <textarea id="admin-down" rows="5" placeholder="Format: number,row,col,answer,clue"></textarea>
+                  </label>
+                  <button type="submit" class="accent">Create Puzzle</button>
+                </form>
+                <div class="admin-results">
+                  <h4>Recent Participants</h4>
+                  <div id="admin-results" class="card-list muted">No results yet.</div>
+                </div>
+              </div>
+            </section>
+          </section>
+        </section>
+      </main>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>
